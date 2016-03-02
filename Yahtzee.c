@@ -537,8 +537,8 @@ int is_point_loss_or_neither (int sum_dice, int point_value)
  *					 starting balance, current balance
  * Returns: New bank balance
  * Preconditions: Start of program
- * Postconditions: Returns bank balance					     
- *************************************************************/
+ * Postconditions: Returns bank balance
+ ************************************************************/
 void chatter_messages (int number_rolls, int win_loss_neither, double initial_bank_balance, double current_bank_balance)
 {
 		// Doubled balance
