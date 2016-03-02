@@ -21,7 +21,7 @@
 
 
 
-#include "functions.h"
+#include "Yahtzee.h"
 
 int main (void)
 {
