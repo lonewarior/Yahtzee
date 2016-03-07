@@ -1,25 +1,26 @@
 /*************************************************************************
- * Programmer: Mitchell Weholt
- * Class: CptS 121; Lab Section 3
- * Programming Assignment: PA4
- * Date: 10/7/15
- *
- * Description: Write a program that implements a craps game according
- *				to the provided rules.The game should allow for wagering.
- *				This means that you need to prompt that user for an
- *				initial bank balance from which wagers will be added or
- *				subtracted. Before each roll prompt the user for a
- *				wager. Once a game is lost or won, the bank balance
- *				should be adjusted. As the game progresses, print
- *				various messages to create some "chatter" such as,
- * 				"Sorry, you busted!", or "Oh, you're going for broke,
- *				huh?", or "Aw cmon, take a chance!", or "You're up big,
- *				now's the time to cash in your chips!"*
- *
+ * Programmer: Mitchell Weholt                                           *
+ * Class: CptS 121; Lab Section 3                                        *
+ * Programming Assignment: PA5											 *
+ * Date: 10/23/15                                                        *
+ *                                                                       *
+ * Description: The game of Yahtzee. There are two players, and the game *
+ *				goes back and forth between them. After each combo is used
+ *				the program will not allow you to use them again, and will
+ *				even show an 'X' in place of the number. Moreover, if a	 *
+ *				combo is selected, but the dice do not meet the			 *
+ *				requirements, then no points will be awarded. At the end,*
+ *				if a player has over 63 points in the "Sum of #" category*
+ *	 			then an extra 35 points will be given.					 * 
+ *				There are 13 rounds.									 *
+ *																		 *
+ *																		 *
  ************************************************************************/
 
-#ifndef PA4_FUNCTIONS
-#define PA4_FUNCTIONS
+
+
+#ifndef PA4_H
+#define PA4_H
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -27,46 +28,37 @@
 #include <stdlib.h>
 #include <time.h>
 
-// The game of craps
-void main_gameplay ();
+void main_gameplay (void);
+int gameplay_menu (void);
+void roll_dice (int dice_values[5], int num_items);
+void print_die (int die[5], int size, int c_combos[13]);
+void reroll (int die[5], int size, int c_combo[13], int player, int round);
+void choose_combo (int die[5], int size, int c_combo[13], int scores[13], int player, int round);
 
-// Prints rules
-void print_game_rules (void);
+void print_score (int scores[13], int player);
+void print_combos (int c_combos[13]);
 
-// Gets user provided bank balance
-double get_bank_balance (void);
+int ones (int die[5], int c_combo[13], int points[13]);
+int twos (int die[5], int c_combo[13], int points[13]);
+int threes (int die[5], int c_combo[13], int points[13]);
+int fours (int die[5], int c_combo[13], int points[13]);
+int fives (int die[5], int c_combo[13], int points[13]);
+int sixes (int die[5], int c_combo[13], int points[13]);
 
-// Gets user provided wager
-double get_wager_amount (void);
+int three_of_a_kind (int die[5], int c_combo[13], int points[13]);
+int four_of_a_kind (int die[5], int c_combo[13], int points[13]);
+int full_house (int die[5], int c_combo[13], int points[13]);
+int lg_straight (int die[5], int c_combo[13], int points [13]);
 
-// Randomly selects an integer between 1-6
-int roll_die (void);
+void end_game (int p1_points[13], int p2_points[13]);
 
-// Prints ASCII dice and sum
-void print_dice (int die1, int die2, int die_sum);
 
-// Adds two ints together and returns an int
-int calculate_sum_dice (int die1, int die2);
 
-// Checks to see if wager is within the balance
-int check_wager_amount (double wager, double balance);
 
-// Calls wager functions and prints error messages if wager is too high
-double process_wager (double balance);
 
-// Determines if first roll is a win, loss, or a point
-int is_win_loss_or_point (int sum_dice);
 
-// Asks user if he/she wants to continue and ensures the responce is valid
-char get_user_continue (void);
 
-// Adds or subtracts wager from bank balance
-double adjust_bank_balance (double bank_balance, double wager_amount, int add_or_subtract);
 
-// Determines if every roll after the first is a win, loss, or neither
-int is_point_loss_or_neither (int sum_dice, int point_value);
 
-// Prints "dealer" chatter messages depending on input
-void chatter_messages (int number_rolls, int win_loss_neither, double initial_bank_balance, double current_bank_balance);
 
-#endif // !PA4_FUNCTIONS
+#endif // !PA4_H
